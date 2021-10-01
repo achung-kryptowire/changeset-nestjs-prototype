@@ -38,6 +38,7 @@ jobs:
       - name: Install zx
         run: npm install -g zx
 
+      - run: rm -rf .npmrc
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
