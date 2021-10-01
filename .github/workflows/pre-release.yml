@@ -26,11 +26,12 @@ jobs:
         with:
           node-version: 16.x
     
-      - run: npm exec -- changeset status --since=main
 
       - name: Install Dependencies
         run: npm ci
-        
+
+      - run: npm exec -- changeset status --since=dev
+
       - name: Install zx
         run: npm install -g zx
       
