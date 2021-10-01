@@ -1,3 +1,3 @@
 #!/usr/bin/env zx
 
-await $`npm exec -- changeset`;
+await $`npm exec -- changeset publish`;

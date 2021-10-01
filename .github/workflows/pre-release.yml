@@ -23,6 +23,9 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+      
+      - name: Install zx
+        run: npm install -g zx
 
       - run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
         env:
