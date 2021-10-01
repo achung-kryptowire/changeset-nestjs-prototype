@@ -26,14 +26,14 @@ jobs:
         with:
           node-version: 16.x
     
-      - run: npm exec -- changeset status --sinceMaster
+      - run: changeset status --since=main
 
       - name: Install Dependencies
         run: npm ci
-
+        
       - name: Install zx
         run: npm install -g zx
-
+      
       - run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
         env:
           JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
