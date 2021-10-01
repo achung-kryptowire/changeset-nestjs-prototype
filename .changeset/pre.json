@@ -1,8 +1,10 @@
 {
-  "mode": "exit",
+  "mode": "pre",
   "tag": "beta",
   "initialVersions": {
     "@kw/changeset-nestjs-prototype": "0.0.1"
   },
-  "changesets": []
+  "changesets": [
+    "eleven-pots-scream"
+  ]
 }
