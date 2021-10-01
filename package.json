@@ -1,5 +1,5 @@
 {
-  "name": "changeset-nestjs-prototype",
+  "name": "@kw/changeset-nestjs-prototype",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -20,6 +20,7 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "version:pre": "zx ./scripts/pre-release/version.mjs",
+    "prepublishOnly": "./scripts/build.mjs",
     "publish:pre": "zx ./scripts/pre-release/publish.mjs"
   },
   "dependencies": {
