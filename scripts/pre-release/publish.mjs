@@ -1,0 +1,1 @@
+await $`npm exec -- changeset`;
