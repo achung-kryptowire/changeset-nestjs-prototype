@@ -26,6 +26,10 @@ jobs:
         with:
           node-version: 16.x
 
+      - run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
+        env:
+          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
+
       - name: Install Dependencies
         run: npm ci
 
@@ -34,9 +38,6 @@ jobs:
       - name: Install zx
         run: npm install -g zx
 
-      - run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
-        env:
-          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -47,6 +48,7 @@ jobs:
           publish: npm run publish:pre
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
 
       # - name: Send a Slack notification if a publish happens
       #   if: steps.changesets.outputs.published == 'true'
