@@ -5,6 +5,9 @@
     "@kw/changeset-nestjs-prototype": "0.0.1"
   },
   "changesets": [
-    "eleven-pots-scream"
+    "afraid-coats-wave",
+    "eleven-pots-scream",
+    "four-frogs-bathe",
+    "many-nails-tan"
   ]
 }
