@@ -5,6 +5,11 @@ on: [push]
 jobs:
   exit-prerelease:
     name: Exit Pre-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
     if: ${{ github.ref != 'refs/heads/dev'}}
     steps:
       - name: Create .npmrc
