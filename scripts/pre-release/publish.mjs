@@ -1,10 +1,17 @@
 #!/usr/bin/env zx
+await $`echo ${process.env.JFROG_NPMRC_B64} | base64 -d >> .npmrc`;
 
-console.log(`====================== Installing dependencies ==============`);
-await $`npm ci`;
+try {
+  console.log(`====================== Installing dependencies ==============`);
+  await $`npm ci`;
 
-console.log(`=============== Building dist =================================`);
-await $`npm run build`;
+  console.log(
+    `=============== Building dist =================================`,
+  );
+  await $`npm run build`;
 
-console.log(`========= Publishing repository ==========`);
-await $`npm_config_registry=https://krwr.jfrog.io/artifactory/api/npm/main/ npm exec -- changeset publish`;
+  console.log(`========= Publishing repository ==========`);
+  await $`npm_config_registry=https://krwr.jfrog.io/artifactory/api/npm/main/ npm exec -- changeset publish`;
+} finally {
+  await $`rm -rf .npmrc`;
+}
