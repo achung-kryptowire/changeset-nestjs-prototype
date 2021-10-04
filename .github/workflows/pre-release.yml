@@ -21,12 +21,14 @@ jobs:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
-      - name: Setup Node.js 16.x
+      - name: Setup Node.js 12.x
         uses: actions/setup-node@master
         with:
           node-version: 16.x
 
-      - run: npm exec -- changeset status --since=dev
+      - run: npm install -g @changesets/cli
+
+      - run: changeset status --since=dev
 
       - name: Install zx
         run: npm install -g zx
@@ -41,7 +43,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
-          
 
 
       # - name: Send a Slack notification if a publish happens
