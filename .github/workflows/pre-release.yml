@@ -15,7 +15,6 @@ jobs:
       contents: write
       packages: write
       issues: read
-      workflows: write
       pull-requests: write
     steps:
       - name: Checkout Repo
