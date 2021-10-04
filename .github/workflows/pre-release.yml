@@ -38,7 +38,6 @@ jobs:
       - name: Install zx
         run: npm install -g zx
 
-      - run: rm -rf .npmrc
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -50,6 +49,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
+          
+      - run: rm -rf .npmrc
 
       # - name: Send a Slack notification if a publish happens
       #   if: steps.changesets.outputs.published == 'true'
