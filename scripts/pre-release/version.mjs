@@ -3,7 +3,7 @@ const preFilePath = path.join(__dirname, '../../.changeset/pre.json');
 
 if (await fs.pathExists(preFilePath)) {
   const pre = JSON.parse((await fs.readFile(preFilePath)).toString());
-  if (pre.mode === 'pre') {
+  if (pre.mode !== 'pre') {
     await $`npm exec -- changeset pre enter beta`;
   }
 }
