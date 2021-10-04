@@ -1,5 +1,12 @@
 # @kw/changeset-nestjs-prototype
 
+## 0.0.2-beta.12
+
+### Patch Changes
+
+- f2c93df: move npmrc script to publish.mjs
+- 0e762ef: y
+
 ## 0.0.2-beta.11
 
 ### Patch Changes
