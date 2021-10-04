@@ -1,5 +1,7 @@
 #!/usr/bin/env zx
 
+await $`echo ${process.env.JFROG_NPMRC_B64} | base64 -d >> .npmrc`;
+
 console.log(`====================== Installing dependencies ==============`);
 await $`npm ci`;
 
