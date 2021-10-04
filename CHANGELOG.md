@@ -1,5 +1,18 @@
 # @kw/changeset-nestjs-prototype
 
+## 0.0.2
+
+### Patch Changes
+
+- e554e36: fix get-changed-workspaces
+- 0cf7055: added stuff
+- 64006bc: bleh
+- 0cc5e54: bleh
+- c547df2: prerelease
+- f2c93df: move npmrc script to publish.mjs
+- ddc712d: bleh
+- 0e762ef: y
+
 ## 0.0.2-beta.12
 
 ### Patch Changes
