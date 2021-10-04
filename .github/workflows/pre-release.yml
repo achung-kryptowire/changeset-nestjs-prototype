@@ -26,12 +26,23 @@ jobs:
         with:
           node-version: 16.x
 
-      - run: npm install -g @changesets/cli
+      - name: Create .npmrc
+        run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
+        env:
+          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
 
-      - run: changeset status --since=dev
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check if there are changes
+        run: npm exec -- changeset status --since=dev
 
       - name: Install zx
         run: npm install -g zx
+
+      - name: Remove .npmrc
+        run: rm -rf .npmrc
+
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
