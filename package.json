@@ -20,7 +20,9 @@
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "version:pre": "./scripts/pre-release/version.mjs",
-    "publish:pre": "./scripts/pre-release/publish.mjs"
+    "publish:pre": "./scripts/pre-release/publish.mjs",
+    "version": "./scripts/release/version.mjs",
+    "publish": "./scripts/release/publish.mjs"
   },
   "dependencies": {
     "@changesets/cli": "^2.17.0",

@@ -1,13 +1,17 @@
-name: pre-release
+name: release
 
 on:
   push:
     branches:
-      - dev
+      - main
+  workflow_run:
+    workflows: ["exit-prerelease"]
+    types:
+      - completed
 
 jobs:
   pre-release:
-    name: Pre-release
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -21,7 +25,7 @@ jobs:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
-      - name: Setup Node.js 12.x
+      - name: Setup Node.js 16.x
         uses: actions/setup-node@master
         with:
           node-version: 16.x
@@ -35,7 +39,7 @@ jobs:
         run: npm ci
 
       - name: Check if there are changes
-        run: npm exec -- changeset status --since=dev
+        run: npm exec -- changeset status --since=main
 
       - name: Install zx
         run: npm install -g zx
@@ -48,9 +52,9 @@ jobs:
         id: changesets
         uses: changesets/action@master
         with:
-          version: npm run version:pre
+          version: npm run version
           # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: npm run publish:pre
+          publish: npm run publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
