@@ -6,7 +6,7 @@ on:
       - dev
 
 jobs:
-  release:
+  pre-release:
     name: Pre-release
     runs-on: ubuntu-latest
     permissions:
@@ -21,22 +21,28 @@ jobs:
           # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
           fetch-depth: 0
 
-      - name: Setup Node.js 12.x
+      - name: Setup Node.js 16.x
         uses: actions/setup-node@master
         with:
           node-version: 16.x
-    
-      - run: npm exec -- changeset status --sinceMaster
+
+      - name: Create .npmrc
+        run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
+        env:
+          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
 
       - name: Install Dependencies
         run: npm ci
-        
+
+      - name: Check if there are changes
+        run: npm exec -- changeset status --since=dev
+
       - name: Install zx
         run: npm install -g zx
-      
-      - run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
-        env:
-          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
+
+      - name: Remove .npmrc
+        run: rm -rf .npmrc
+
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets
@@ -47,8 +53,11 @@ jobs:
           publish: npm run publish:pre
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
+
 
       # - name: Send a Slack notification if a publish happens
       #   if: steps.changesets.outputs.published == 'true'
       #   # You can do something when a publish happens.
       #   run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"
+

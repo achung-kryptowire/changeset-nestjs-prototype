@@ -1,0 +1,14 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "@kw/changeset-nestjs-prototype": "0.0.2"
+  },
+  "changesets": [
+    "few-readers-thank",
+    "giant-socks-cover",
+    "heavy-actors-repeat",
+    "unlucky-chicken-sell",
+    "warm-starfishes-mate"
+  ]
+}
