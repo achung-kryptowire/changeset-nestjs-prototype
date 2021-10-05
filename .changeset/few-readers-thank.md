@@ -1,5 +1,5 @@
 ---
-"@fake-scope/fake-pkg": patch
+'@kw/changeset-nestjs-prototype': patch
 ---
 
 comited
