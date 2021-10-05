@@ -7,37 +7,6 @@ on:
 
 
 jobs:
-  exit-prerelease:
-    name: Exit Pre-release
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-        with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
-
-      - name: Setup Node.js 16.x
-        uses: actions/setup-node@master
-        with:
-          node-version: 16.x
-
-      - name: Create .npmrc
-        run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
-        env:
-          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
-
-      - run: npm ci
-
-      - run: npm exec -- changeset pre exit
-
-      - name: Remove .npmrc
-        run: rm -rf .npmrc
-
   release:
     name: Release
     runs-on: ubuntu-latest
@@ -46,8 +15,7 @@ jobs:
       packages: write
       issues: read
       pull-requests: write
-    
-    needs: exit-prerelease
+
 
     steps:
       - name: Checkout Repo
