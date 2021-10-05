@@ -1,6 +1,6 @@
 {
   "name": "@kw/changeset-nestjs-prototype",
-  "version": "0.0.3-beta.0",
+  "version": "0.0.3-beta.9",
   "description": "",
   "author": "",
   "license": "UNLICENSED",
@@ -21,8 +21,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "version:pre": "./scripts/pre-release/version.mjs",
     "publish:pre": "./scripts/pre-release/publish.mjs",
-    "version": "./scripts/release/version.mjs",
-    "publish": "./scripts/release/publish.mjs"
+    "version:prod": "./scripts/release/version.mjs",
+    "publish:prod": "./scripts/release/publish.mjs"
   },
   "dependencies": {
     "@changesets/cli": "^2.17.0",

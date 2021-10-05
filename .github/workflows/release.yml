@@ -4,13 +4,30 @@ on:
   push:
     branches:
       - main
-  workflow_run:
-    workflows: ["exit-prerelease"]
-    types:
-      - completed
+
 
 jobs:
-  pre-release:
+  exit-prerelease:
+    name: Exit Pre-release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+
+    steps:
+      - name: Create .npmrc
+        run: echo ${JFROG_NPMRC_B64} | base64 -d >> .npmrc
+        env:
+          JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
+
+      - run: npm ci
+
+      - run: npm exec -- changeset pre exit
+
+      - name: Remove .npmrc
+        run: rm -rf .npmrc
+
+  release:
     name: Release
     runs-on: ubuntu-latest
     permissions:
@@ -18,6 +35,9 @@ jobs:
       packages: write
       issues: read
       pull-requests: write
+    
+    needs: exit-prerelease
+
     steps:
       - name: Checkout Repo
         uses: actions/checkout@master
