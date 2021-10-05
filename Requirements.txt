@@ -1,0 +1,22 @@
+dev branch:
+- able to install from jfrog
+- multiple pushes to dev
+- should handle squashes
+- on change only
+  - create prerelease
+  - publish to jfrog, tag, and update npm version
+- on no change
+  - none of the above occurs
+
+main branch:
+- able to install from jfrog
+- multiple pushes to main
+- should handle squashes
+- on change only
+  - create release
+  - publish to jfrog, tag, and update npm version
+- on no change
+  - none of the above occurs
+
+merge main back to dev
+
