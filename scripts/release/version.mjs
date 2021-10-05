@@ -1,15 +1,14 @@
 #!/usr/bin/env zx
+const preFilePath = path.join(__dirname, '../../.changeset/pre.json');
 
-await $`echo ${process.env.JFROG_NPMRC_B64} | base64 -d >> .npmrc`;
+const pre = (await fs.pathExists(preFilePath))
+  ? JSON.parse((await fs.readFile(preFilePath)).toString())
+  : 'DNE';
 
-try {
-  console.log(
-    `=============== Building dist =================================`,
-  );
-  await $`npm run build`;
-
-  console.log(`========= Publishing repository ==========`);
-  await $`npm_config_registry=https://krwr.jfrog.io/artifactory/api/npm/main/ npm exec -- changeset publish`;
-} finally {
-  await $`rm -rf .npmrc`;
+if (pre !== 'DNE' && pre.mode === 'pre') {
+  console.log(`============== Entering pre mode ================`);
+  await $`npm exec -- changeset pre exit`;
 }
+
+console.log('================== Versioning ==============');
+await $`npm exec -- changeset version`;
