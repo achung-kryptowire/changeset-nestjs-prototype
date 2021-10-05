@@ -1,5 +1,14 @@
 # @kw/changeset-nestjs-prototype
 
+## 0.0.3-beta.0
+
+### Patch Changes
+
+- 4d551b2: comited
+- 74c9b2a: exit prerelease
+- 5d24fcb: bleh
+- 561a98b: bleh
+
 ## 0.0.2
 
 ### Patch Changes
