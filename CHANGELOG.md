@@ -1,5 +1,11 @@
 # @kw/changeset-nestjs-prototype
 
+## 0.0.3-beta.11
+
+### Patch Changes
+
+- a2114d8: hel
+
 ## 0.0.3-beta.10
 
 ### Patch Changes
