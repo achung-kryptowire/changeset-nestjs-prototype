@@ -2,9 +2,6 @@
 await $`echo ${process.env.JFROG_NPMRC_B64} | base64 -d >> .npmrc`;
 
 try {
-  console.log(`====================== Installing dependencies ==============`);
-  await $`npm ci`;
-
   console.log(
     `=============== Building dist =================================`,
   );
