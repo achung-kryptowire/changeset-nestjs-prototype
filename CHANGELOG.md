@@ -1,5 +1,11 @@
 # @kw/changeset-nestjs-prototype
 
+## 0.0.3-beta.10
+
+### Patch Changes
+
+- f973023: stuff
+
 ## 0.0.3-beta.0
 
 ### Patch Changes
