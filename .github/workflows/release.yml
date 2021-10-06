@@ -59,8 +59,20 @@ jobs:
           JFROG_NPMRC_B64: ${{ secrets.JFROG_NPMRC_B64 }}
 
 
-      # - name: Send a Slack notification if a publish happens
-      #   if: steps.changesets.outputs.published == 'true'
-      #   # You can do something when a publish happens.
-      #   run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"
+      - name: Push to dev if publish succeeds
+        uses: ChristopherHX/conditional@b4a9649204f81002ec9a4ef7d4bf7d6b2ab7fa55
+        with:
+          if: steps.changesets.outputs.published == 'true'
+        # You can do something when a publish happens.
+          step: |
+            - name: Create Pull Request
+              id: cpr
+              uses: peter-evans/create-pull-request@v3
+              with: 
+                base: dev
+
+            - name: Check outputs
+              run: |
+                echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+                echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
 
