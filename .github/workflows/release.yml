@@ -61,7 +61,6 @@ jobs:
 
       - name: Push to dev if publish succeeds
         if: steps.changesets.outputs.published == 'true'
-        # You can do something when a publish happens.
         - name: Create Pull Request
           id: cpr
           uses: peter-evans/create-pull-request@v3
