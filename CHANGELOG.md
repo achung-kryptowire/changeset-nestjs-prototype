@@ -1,5 +1,11 @@
 # @kw/changeset-nestjs-prototype
 
+## 0.0.3
+
+### Patch Changes
+
+- 7d5e371: bleh
+
 ## 0.0.3-beta.13
 
 ### Patch Changes
